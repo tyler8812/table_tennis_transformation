@@ -10,6 +10,7 @@ four_point = []
 
 result = cv.imread('black.png')
 img = cv.imread('black.png')
+dst = np.asarray([])
 
 cv.imshow('image', img)
 
@@ -19,7 +20,7 @@ t = ProjectiveTransform()
 
 def click_event(event, x, y, flags, params):
     
-    global img, four_point, t
+    global img, four_point, t, dst
 
     if len(four_point) == 4:
         cv.line(img, (four_point[0][0], four_point[0][1]), (four_point[1][0], four_point[1][1]), (255, 255, 255), 3)
@@ -74,4 +75,7 @@ def click_event(event, x, y, flags, params):
     cv.imshow('result', result)  
 
 cv.setMouseCallback('image', click_event)
+
 cv.waitKey(0)
+print(dst)
+print(t.inverse(dst))
